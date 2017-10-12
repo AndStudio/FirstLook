@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="VMV-Wd-LAq">
             <objects>
-                <viewController storyboardIdentifier="FavoritesViewController" id="Vwm-TD-7JR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesViewController" id="Vwm-TD-7JR" customClass="FavoritesViewController" customModule="FirstLook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OKj-Gm-lKH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="330" id="Y3l-M2-bsw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteMovieCell" rowHeight="330" id="Y3l-M2-bsw">
                                         <rect key="frame" x="0.0" y="28" width="375" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y3l-M2-bsw" id="Obb-M4-gpB">
