@@ -13,18 +13,6 @@ struct Movie: Codable, Equatable {
     let title: String
 }
 
-// favorite computed property
-extension Movie {
-    var isFavorite: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: title)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: title)
-        }
-    }
-}
-
 // equatable
 extension Movie {
     static func ==(_ lhs: Movie, _ rhs: Movie) -> Bool {

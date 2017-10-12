@@ -28,8 +28,12 @@ extension MovieAPI {
         let request = URLRequest(url: searchURL)
         _dataTask = _defaultSession.dataTask(with: request) { (data, response, error) in
             defer { self._dataTask = nil }
-            
+            let result = processSearchRequest(forSearchTerm: searchTerm, data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(result)
+            }
         }
+        _dataTask?.resume()
     }
     
     // movie search URL for search term requestURL
