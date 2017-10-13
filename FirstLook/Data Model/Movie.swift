@@ -11,6 +11,7 @@ import Foundation
 struct Movie: Codable, Equatable {
     
     var title: String
+    var id: Int
     var hasVideo: Bool
     var releaseDate: String
     var poster: String?
@@ -20,6 +21,7 @@ struct Movie: Codable, Equatable {
     
     private enum CodingKeys: String, CodingKey {
         case title
+        case id 
         case hasVideo = "video"
         case releaseDate = "release_date"
         case poster = "poster_path"

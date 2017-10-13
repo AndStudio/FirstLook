@@ -48,6 +48,16 @@ extension MovieAPI {
         return nil
     }
     
+    //video endpoint https://api.themoviedb.org/3/movie/6479/videos?api_key=1796c09fd7616b8f1534c86ee98cc305&language=en-US
+    
+    //fetch and set a movie's video
+    private static func fetchVideoForMovie(_ movie: Movie) -> URL? {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)/videos") else { return nil }
+        let urlParameters = ["api_key": "\(Keys.apiKey)", "language": "en-US"]
+        let requestURL = buildURL(byAddingParameters: urlParameters, toURL: url)
+        return requestURL
+    }
+    
     // add endpoint components to url and return endpoint
     static func buildURL(byAddingParameters parameters: [String: String]?,
                        toURL url: URL) -> URL {
@@ -79,6 +89,9 @@ extension MovieAPI {
             let movies = try? JSONDecoder().decode([Movie].self, from: moviesData) else {
                 return .failure(Error.processingMoviesFailed(reason: "Could not get movies back from JSON payload"))
         }
+        
+        
+        
         return .success(MovieSearchResults(searchTerm: searchTerm, searchResults: movies))
         
     }
