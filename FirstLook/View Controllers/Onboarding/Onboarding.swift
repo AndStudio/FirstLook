@@ -8,12 +8,25 @@
 
 import UIKit
 
+protocol OnboardingScreen where Self: UIViewController {
+    
+    var page: OnboardingState.Page { get }
+    
+}
+
 class Onboarding: UIViewController {
     
     // MARK: - Properties
     
     var pageViewController: UIPageViewController!
     var currentPage = OnboardingState(currentPage: .title)
+    
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        pageViewController.setViewControllers([TitlePage.initializeFromStoryboard()], direction: .forward, animated: true, completion: nil)
+    }
     
 }
 
@@ -36,12 +49,38 @@ extension Onboarding {
 
 extension Onboarding: UIPageViewControllerDataSource {
     
+    func createVCFrom(page: OnboardingState.Page) -> OnboardingScreen {
+        switch page {
+        case .title:
+            let titlePage = TitlePage.initializeFromStoryboard()
+            return titlePage
+        case .genre1:
+            let genre1 = SelectionPage.initializeFromStoryboard()
+            return genre1
+        case .genre2:
+            let genre2 = SelectionPage.initializeFromStoryboard()
+            genre2.page = .genre2
+            return genre2
+        case .genre3:
+            let genre3 = SelectionPage.initializeFromStoryboard()
+            genre3.page = .genre3
+            return genre3
+        case .permissions:
+            let permissions = PermissionsPage.initializeFromStoryboard()
+            return permissions
+        }
+    }
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return nil
+        let page = currentPage.previousPage()
+        let vc = createVCFrom(page: page)
+        return vc as? UIViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return nil
+        let page = currentPage.nextPage()
+        let vc = createVCFrom(page: page)
+        return vc as? UIViewController
     }
     
 }

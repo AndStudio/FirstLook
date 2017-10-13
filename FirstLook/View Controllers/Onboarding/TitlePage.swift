@@ -8,8 +8,14 @@
 
 import UIKit
 
-class TitlePage: UIViewController {
+class TitlePage: UIViewController, OnboardingScreen {
     
+    // MARK: - Internal properties
     
+    var page: OnboardingState.Page = .title
     
 }
+
+// MARK: - Storyboard Initializable
+
+extension TitlePage: StoryboardInitializable { }

@@ -8,8 +8,14 @@
 
 import UIKit
 
-class SelectionPage: UIViewController {
+class SelectionPage: UIViewController, OnboardingScreen {
     
+    // MARK: - Internal properties
     
+    var page: OnboardingState.Page = .genre1
     
 }
+
+// MARK: - Storyboard Initializable
+
+extension SelectionPage: StoryboardInitializable { }

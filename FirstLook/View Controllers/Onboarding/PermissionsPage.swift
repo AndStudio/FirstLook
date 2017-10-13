@@ -8,8 +8,14 @@
 
 import UIKit
 
-class PermissionsPage: UIViewController {
+class PermissionsPage: UIViewController, OnboardingScreen {
     
+    // MARK: - Internal properties
     
+    var page: OnboardingState.Page = .permissions
     
 }
+
+// MARK: - Storyboard Initializable
+
+extension PermissionsPage: StoryboardInitializable { }
