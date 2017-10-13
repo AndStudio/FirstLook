@@ -38,36 +38,36 @@ class OnboardingState {
     
     // MARK: - Internal Properties
     
-    var currentPage: Page
+    var page: Page
     
     // MARK: - Initializers
     
     init(currentPage: Page) {
-        self.currentPage = currentPage
+        self.page = currentPage
     }
     
     // MARK: - Internal methods
     
     func previousPage() -> Page {
-        switch currentPage {
-        case .title: currentPage = .title
-        case .genre1: currentPage = .title
-        case .genre2: currentPage = .genre1
-        case .genre3: currentPage = .genre2
-        case .permissions: currentPage = .genre3
+        switch page {
+        case .title: page = .title
+        case .genre1: page = .title
+        case .genre2: page = .genre1
+        case .genre3: page = .genre2
+        case .permissions: page = .genre3
         }
-        return currentPage
+        return page
     }
     
     func nextPage() -> Page {
-        switch currentPage {
-        case .title: currentPage = .genre1
-        case .genre1: currentPage = .genre2
-        case .genre2: currentPage = .genre3
-        case .genre3: currentPage = .permissions
-        case .permissions: currentPage = .permissions
+        switch page {
+        case .title: page = .genre1
+        case .genre1: page = .genre2
+        case .genre2: page = .genre3
+        case .genre3: page = .permissions
+        case .permissions: page = .permissions
         }
-        return currentPage
+        return page
     }
     
 }

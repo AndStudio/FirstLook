@@ -72,13 +72,17 @@ extension Onboarding: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let prevPage = currentPage.page
         let page = currentPage.previousPage()
+        if prevPage == page { return nil }
         let vc = createVCFrom(page: page)
         return vc as? UIViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let prevPage = currentPage.page
         let page = currentPage.nextPage()
+        if prevPage == page { return nil }
         let vc = createVCFrom(page: page)
         return vc as? UIViewController
     }
