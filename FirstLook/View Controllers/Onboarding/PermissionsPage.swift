@@ -14,6 +14,23 @@ class PermissionsPage: UIViewController, OnboardingScreen {
     
     var page: OnboardingState.Page = .permissions
     
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+    
+}
+
+// MARK: - Private methods
+
+private extension PermissionsPage {
+    
+    func setupUI() {
+        print("Permissions Page")
+    }
+    
 }
 
 // MARK: - Storyboard Initializable

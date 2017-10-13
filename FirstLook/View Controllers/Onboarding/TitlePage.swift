@@ -14,6 +14,23 @@ class TitlePage: UIViewController, OnboardingScreen {
     
     var page: OnboardingState.Page = .title
     
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+    
+}
+
+// MARK: - Private methods
+
+private extension TitlePage {
+    
+    func setupUI() {
+        print("Title Page")
+    }
+    
 }
 
 // MARK: - Storyboard Initializable
