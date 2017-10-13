@@ -43,4 +43,8 @@ private extension SelectionPage {
 
 // MARK: - Storyboard Initializable
 
-extension SelectionPage: StoryboardInitializable { }
+extension SelectionPage: StoryboardInitializable {
+    
+    static var storyboardName: String { return String(describing: Onboarding.self) }
+    
+}

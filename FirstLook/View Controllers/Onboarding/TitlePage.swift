@@ -35,4 +35,8 @@ private extension TitlePage {
 
 // MARK: - Storyboard Initializable
 
-extension TitlePage: StoryboardInitializable { }
+extension TitlePage: StoryboardInitializable {
+    
+    static var storyboardName: String { return String(describing: Onboarding.self) }
+    
+}

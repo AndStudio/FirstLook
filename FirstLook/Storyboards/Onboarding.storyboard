@@ -20,7 +20,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWH-Xe-TMx">
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <connections>
-                                    <segue destination="Lvz-ZS-EKf" kind="embed" id="p2m-KJ-Hx3"/>
+                                    <segue destination="Lvz-ZS-EKf" kind="embed" identifier="embedPageViewController" id="p2m-KJ-Hx3"/>
                                 </connections>
                             </containerView>
                         </subviews>

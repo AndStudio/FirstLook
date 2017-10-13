@@ -98,3 +98,7 @@ extension Onboarding: SegueHandling {
     }
     
 }
+
+// MARK: - Storyboard Initializable
+
+extension Onboarding: StoryboardInitializable { }

@@ -50,22 +50,24 @@ class OnboardingState {
     
     func previousPage() -> Page {
         switch currentPage {
-        case .title: return .title
-        case .genre1: return .title
-        case .genre2: return .genre1
-        case .genre3: return .genre2
-        case .permissions: return .genre3
+        case .title: currentPage = .title
+        case .genre1: currentPage = .title
+        case .genre2: currentPage = .genre1
+        case .genre3: currentPage = .genre2
+        case .permissions: currentPage = .genre3
         }
+        return currentPage
     }
     
     func nextPage() -> Page {
         switch currentPage {
-        case .title: return .genre1
-        case .genre1: return .genre2
-        case .genre2: return .genre3
-        case .genre3: return .permissions
-        case .permissions: return .permissions
+        case .title: currentPage = .genre1
+        case .genre1: currentPage = .genre2
+        case .genre2: currentPage = .genre3
+        case .genre3: currentPage = .permissions
+        case .permissions: currentPage = .permissions
         }
+        return currentPage
     }
     
 }

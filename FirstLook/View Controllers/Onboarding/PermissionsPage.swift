@@ -35,4 +35,8 @@ private extension PermissionsPage {
 
 // MARK: - Storyboard Initializable
 
-extension PermissionsPage: StoryboardInitializable { }
+extension PermissionsPage: StoryboardInitializable {
+    
+    static var storyboardName: String { return String(describing: Onboarding.self) }
+    
+}
