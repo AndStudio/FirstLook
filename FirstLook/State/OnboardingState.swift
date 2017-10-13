@@ -46,12 +46,26 @@ class OnboardingState {
         self.currentPage = currentPage
     }
     
-    func previousPage() {
-        
+    // MARK: - Internal methods
+    
+    func previousPage() -> Page {
+        switch currentPage {
+        case .title: return .title
+        case .genre1: return .title
+        case .genre2: return .genre1
+        case .genre3: return .genre2
+        case .permissions: return .genre3
+        }
     }
     
-    func nextPage() {
-        
+    func nextPage() -> Page {
+        switch currentPage {
+        case .title: return .genre1
+        case .genre1: return .genre2
+        case .genre2: return .genre3
+        case .genre3: return .permissions
+        case .permissions: return .permissions
+        }
     }
     
 }
