@@ -74,11 +74,11 @@
 		5AE758D11F8FFA390030EB53 /* FirstLook */ = {
 			isa = PBXGroup;
 			children = (
-				5AE758F31F9005B20030EB53 /* View Controllers */,
 				5AE758ED1F9005800030EB53 /* Data Model */,
 				5AE758F01F9005930030EB53 /* API Service */,
 				5AE758F51F90064F0030EB53 /* Utilities */,
 				5AE758F41F9006460030EB53 /* Cache */,
+				5AE758F31F9005B20030EB53 /* View Controllers */,
 				5AE758E41F90049D0030EB53 /* Storyboards */,
 				5AE758EB1F9005600030EB53 /* Sources */,
 				5AE758EC1F9005670030EB53 /* Resources */,
