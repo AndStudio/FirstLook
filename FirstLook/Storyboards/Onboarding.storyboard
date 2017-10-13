@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Onboarding-->
         <scene sceneID="23J-Vn-U0t">
             <objects>
-                <viewController id="vqK-5E-Q7o" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Onboarding" id="vqK-5E-Q7o" customClass="Onboarding" customModule="FirstLook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E8G-wc-SO9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="-102" y="122"/>
         </scene>
-        <!--View Controller-->
+        <!--Title Page-->
         <scene sceneID="Sxa-gk-AtV">
             <objects>
-                <viewController id="3bY-v0-IQl" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TitlePage" id="3bY-v0-IQl" customClass="TitlePage" customModule="FirstLook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZI-RC-1C2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="-103" y="823"/>
         </scene>
-        <!--View Controller-->
+        <!--Selection Page-->
         <scene sceneID="7ka-lj-xlU">
             <objects>
-                <viewController id="bZk-wo-2lX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectionPage" id="bZk-wo-2lX" customClass="SelectionPage" customModule="FirstLook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="02K-D6-PBQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="689" y="822"/>
         </scene>
-        <!--View Controller-->
+        <!--Permissions Page-->
         <scene sceneID="djP-Fl-BZt">
             <objects>
-                <viewController id="ark-DV-G9P" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PermissionsPage" id="ark-DV-G9P" customClass="PermissionsPage" customModule="FirstLook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kOf-du-9r5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OnboardingState {
+class OnboardingState {
     
     // MARK: - Additional Types
     
@@ -18,7 +18,7 @@ struct OnboardingState {
         case permissions
     }
     
-    enum Page {
+    enum Page: Int {
         case title
         case genre1
         case genre2
@@ -39,5 +39,19 @@ struct OnboardingState {
     // MARK: - Internal Properties
     
     var currentPage: Page
+    
+    // MARK: - Initializers
+    
+    init(currentPage: Page) {
+        self.currentPage = currentPage
+    }
+    
+    func previousPage() {
+        
+    }
+    
+    func nextPage() {
+        
+    }
     
 }

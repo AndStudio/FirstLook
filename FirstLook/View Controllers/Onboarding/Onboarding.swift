@@ -13,7 +13,7 @@ class Onboarding: UIViewController {
     // MARK: - Properties
     
     var pageViewController: UIPageViewController!
-    var currentPage = OnboardingState.Page.title
+    var currentPage = OnboardingState(currentPage: .title)
     
 }
 
