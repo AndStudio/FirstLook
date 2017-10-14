@@ -48,6 +48,24 @@ extension MovieAPI {
         return nil
     }
     
+    //video endpoint https://api.themoviedb.org/3/movie/6479/videos?api_key=1796c09fd7616b8f1534c86ee98cc305&language=en-US
+    
+    //build the data endpoitn for a movie's video key
+    private static func fetchVideoForMovie(_ movie: Movie) -> URL? {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)/videos") else { return nil }
+        let urlParameters = ["api_key": "\(Keys.apiKey)"]
+        let requestURL = buildURL(byAddingParameters: urlParameters, toURL: url)
+        return requestURL
+    }
+    
+    // build the data endpoint for a movie's credits
+    private static func fetchCastForMovie(_ movie: Movie) -> URL? {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)/credits") else { return nil }
+        let urlParameters = ["api_key": "\(Keys.apiKey)"]
+        let requestURL = buildURL(byAddingParameters: urlParameters, toURL: url)
+        return requestURL
+    }
+    
     // add endpoint components to url and return endpoint
     static func buildURL(byAddingParameters parameters: [String: String]?,
                        toURL url: URL) -> URL {
@@ -74,13 +92,77 @@ extension MovieAPI {
                 return .failure(Error.requestFailed(reason: "Failed to parse json into data"))
         }
         
+        // decode serialize movie objects
         guard let moviesContainer = results["results"] as? [JSONDictionary],
             let moviesData = jsonToString(moviesContainer)?.data(using: .utf8),
             let movies = try? JSONDecoder().decode([Movie].self, from: moviesData) else {
                 return .failure(Error.processingMoviesFailed(reason: "Could not get movies back from JSON payload"))
         }
+        
+        // set the movie's video endpoint
+        for movie in movies {
+            fetchVideoEndpoints(forMovie: movie, completion: {
+            })
+            fetchCredits(forMovie: movie, completion: {
+                
+            })
+        }
+        
+        
         return .success(MovieSearchResults(searchTerm: searchTerm, searchResults: movies))
         
+    }
+    
+    private static func fetchVideoEndpoints(forMovie movie: Movie, completion: @escaping () -> Void) {
+        
+        guard let url = fetchVideoForMovie(movie) else { return }
+        let request = URLRequest(url: url)
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+            }
+            
+            guard let data = data else { return }
+            
+            guard let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary else { return }
+            
+            guard let videosContainer = jsonDictionary!["results"] as? [JSONDictionary] else {
+                    return
+            }
+            
+            for item in videosContainer {
+                
+                guard let key = item["key"] as? String else { return }
+                let youtubeURL = "https://www.youtube.com/watch?v=\(key)"
+                movie.video = youtubeURL
+                
+            }
+        }
+        dataTask.resume()
+    }
+    
+    private static func fetchCredits(forMovie movie: Movie, completion: @escaping () -> Void) {
+        guard let url = fetchCastForMovie(movie) else { return }
+        let request = URLRequest(url: url)
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+            }
+            guard let data = data,
+                let jsonDict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary else {
+                    return
+            }
+            
+            guard let creditsContainer = jsonDict!["cast"] as? [JSONDictionary] else { return }
+            
+            let cast = creditsContainer.flatMap { $0["id"] as? Int }
+            movie.cast = cast
+            
+        }
+        dataTask.resume()
     }
     
     private static func jsonToString(_ json: Any) -> String? {

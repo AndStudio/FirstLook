@@ -14,6 +14,7 @@ struct Keys {
     
     static let apiKey = "1796c09fd7616b8f1534c86ee98cc305"
     static let baseURL = URL(string: "https://api.themoviedb.org/3/search/movie")
+    static let videoURL = URL(string: "https://api.themoviedb.org/3/movie")
     static let imageURL = URL(string: "http://image.tmdb.org/t/p/w500")
     
     //MARK: - API Keys

@@ -8,9 +8,25 @@
 
 import Foundation
 
-struct Movie: Codable, Equatable {
-    enum CodingKeys: String, CodingKey { case title }
-    let title: String
+class Movie: Codable, Equatable {
+    
+    var title: String
+    var id: Int
+    var hasVideo: Bool
+    var releaseDate: String
+    var poster: String?
+    var overview: String?
+    var cast: [Int]? = []
+    var video: String? = ""
+    
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case id 
+        case hasVideo = "video"
+        case releaseDate = "release_date"
+        case poster = "poster_path"
+        case overview
+    }
 }
 
 // equatable
