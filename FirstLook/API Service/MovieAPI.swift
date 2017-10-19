@@ -54,7 +54,7 @@ extension MovieAPI {
     private static func fetchVideoForMovie(_ movie: Movie) -> URL? {
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)/videos") else { return nil }
         let urlParameters = ["api_key": "\(Keys.apiKey)"]
-        let requestURL = buildURL(byAddingParameters: urlParameters, toURL: url)
+        var requestURL = buildURL(byAddingParameters: urlParameters, toURL: url)
         return requestURL
     }
     
@@ -95,13 +95,14 @@ extension MovieAPI {
         // decode serialize movie objects
         guard let moviesContainer = results["results"] as? [JSONDictionary],
             let moviesData = jsonToString(moviesContainer)?.data(using: .utf8),
-            let movies = try? JSONDecoder().decode([Movie].self, from: moviesData) else {
+            var movies = try? JSONDecoder().decode([Movie].self, from: moviesData) else {
                 return .failure(Error.processingMoviesFailed(reason: "Could not get movies back from JSON payload"))
         }
         
-        // set the movie's video endpoint
+        // TODO: - clean this up
         for movie in movies {
             fetchVideoEndpoints(forMovie: movie, completion: {
+                
             })
             fetchCredits(forMovie: movie, completion: {
                 
@@ -114,7 +115,7 @@ extension MovieAPI {
     }
     
     private static func fetchVideoEndpoints(forMovie movie: Movie, completion: @escaping () -> Void) {
-        
+        var movie = movie
         guard let url = fetchVideoForMovie(movie) else { return }
         let request = URLRequest(url: url)
         
@@ -124,19 +125,17 @@ extension MovieAPI {
                 print(error)
             }
             
-            guard let data = data else { return }
-            
-            guard let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary else { return }
-            
-            guard let videosContainer = jsonDictionary!["results"] as? [JSONDictionary] else {
-                    return
-            }
+            guard let data = data,
+                let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary,
+                let videosContainer = jsonDictionary!["results"] as? [JSONDictionary] else { return }
             
             for item in videosContainer {
                 
                 guard let key = item["key"] as? String else { return }
                 let youtubeURL = "https://www.youtube.com/watch?v=\(key)"
-                movie.video = youtubeURL
+                
+//                movie.cast = youtubeURL
+                movie.update(cast: [], video: youtubeURL)
                 
             }
         }
@@ -144,19 +143,21 @@ extension MovieAPI {
     }
     
     private static func fetchCredits(forMovie movie: Movie, completion: @escaping () -> Void) {
+        var movie = movie 
         guard let url = fetchCastForMovie(movie) else { return }
         let request = URLRequest(url: url)
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
             if let error = error {
                 print(error)
             }
+            
             guard let data = data,
-                let jsonDict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary else {
+                let jsonDict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSONDictionary,
+                let creditsContainer = jsonDict!["cast"] as? [JSONDictionary] else {
                     return
             }
-            
-            guard let creditsContainer = jsonDict!["cast"] as? [JSONDictionary] else { return }
             
             let cast = creditsContainer.flatMap { $0["id"] as? Int }
             movie.cast = cast

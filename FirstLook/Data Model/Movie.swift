@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Movie: Codable, Equatable {
+struct Movie: Codable, Equatable {
     
     var title: String
     var id: Int
@@ -16,7 +16,9 @@ class Movie: Codable, Equatable {
     var releaseDate: String
     var poster: String?
     var overview: String?
+    
     var cast: [Int]? = []
+    
     var video: String? = ""
     
     private enum CodingKeys: String, CodingKey {
@@ -26,6 +28,14 @@ class Movie: Codable, Equatable {
         case releaseDate = "release_date"
         case poster = "poster_path"
         case overview
+    }
+}
+
+// Update Cast and Movie properties
+extension Movie {
+    mutating func update(cast: [Int], video: String) {
+        self.cast = cast
+        self.video = video
     }
 }
 
